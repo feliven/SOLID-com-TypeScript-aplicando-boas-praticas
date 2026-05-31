@@ -1,5 +1,5 @@
 // Módulo A
-class Log {
+class LogService {
   registrarMensagem(mensagem: string): void {
     console.log(`[LOG] ${mensagem}`);
   }
@@ -7,15 +7,15 @@ class Log {
 
 // Módulo B
 class ServicoAutenticacao {
-  constructor(private log: Log) {}
+  constructor(private logService: LogService) {}
 
   autenticarUsuario(): void {
     // Lógica de autenticação
-    this.log.registrarMensagem("Usuário autenticado com sucesso.");
+    this.logService.registrarMensagem("Usuário autenticado com sucesso.");
   }
 }
 
 // Utilização dos Módulos A e B
-const log = new Log();
+const log = new LogService();
 const servicoAutenticacao = new ServicoAutenticacao(log);
 servicoAutenticacao.autenticarUsuario();
