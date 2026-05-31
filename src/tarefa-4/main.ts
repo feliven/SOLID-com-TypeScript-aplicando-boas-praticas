@@ -1,4 +1,4 @@
-type IFormaPagamento = "cheque" | "dinheiro" | "transferência";
+type IFormaPagamento = "cheque" | "dinheiro" | "Pix";
 
 interface IPagamento {
   valor: number;
@@ -26,5 +26,8 @@ pagamentoCheque.pagar();
 const pagamentoDinheiro = new Pagamento(200, "dinheiro");
 pagamentoDinheiro.pagar();
 
-const pagamentoTransferencia = new Pagamento(300, "transferência");
-pagamentoTransferencia.pagar();
+// const pagamentoTransferencia = new Pagamento(300, "transferência");
+// pagamentoTransferencia.pagar();
+
+const pagamentoPix = new Pagamento(300, "Pix");
+pagamentoPix.pagar();
