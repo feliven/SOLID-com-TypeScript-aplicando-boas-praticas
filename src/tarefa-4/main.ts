@@ -1,74 +1,30 @@
-interface Pagamento {
+type IFormaPagamento = "cheque" | "dinheiro" | "transferência";
+
+interface IPagamento {
   valor: number;
-  pagarDinheiro(): void;
-  pagarTransferencia(): void;
-  pagarCheque(): void;
+  formaPagamento: IFormaPagamento;
+  pagar(): void;
 }
 
-class PagamentoCheque implements Pagamento {
+class Pagamento implements IPagamento {
   valor: number;
+  formaPagamento: IFormaPagamento;
 
-  constructor(valor: number) {
+  constructor(valor: number, formaPagamento: IFormaPagamento) {
     this.valor = valor;
-  }
-  pagarCheque(): void {
-    console.log(`O pagamento de ${this.valor} será feito por cheque.`);
+    this.formaPagamento = formaPagamento;
   }
 
-  pagarDinheiro(): void {
-    throw new Error("Pagamento em cheque não pode ser pago por dinheiro.");
-  }
-
-  pagarTransferencia(): void {
-    throw new Error("Pagamento em cheque não pode ser pago por transferência.");
+  pagar(): void {
+    console.log(`O pagamento de ${this.valor} será feito por ${this.formaPagamento}.`);
   }
 }
 
-class PagamentoDinheiro implements Pagamento {
-  valor: number;
+const pagamentoCheque = new Pagamento(100, "cheque");
+pagamentoCheque.pagar();
 
-  constructor(valor: number) {
-    this.valor = valor;
-  }
+const pagamentoDinheiro = new Pagamento(200, "dinheiro");
+pagamentoDinheiro.pagar();
 
-  pagarDinheiro(): void {
-    console.log(`O pagamento de ${this.valor} será feito por dinheiro.`);
-  }
-
-  pagarTransferencia(): void {
-    throw new Error("Pagamento em dinheiro não pode ser pago por transferência.");
-  }
-  pagarCheque(): void {
-    throw new Error("Pagamento em dinheiro não pode ser pago por cheque.");
-  }
-}
-
-class PagamentoPorTransferencia implements Pagamento {
-  valor: number;
-
-  constructor(valor: number) {
-    this.valor = valor;
-  }
-
-  pagarTransferencia(): void {
-    console.log(`O pagamento de ${this.valor} será feito por transferência.`);
-  }
-  pagarDinheiro(): void {
-    throw new Error("Pagamento por transferência não pode ser recebido em dinheiro.");
-  }
-
-  pagarCheque(): void {
-    throw new Error("Pagamento por transferência não pode ser pago em cheque.");
-  }
-}
-
-const pagamentoCheque = new PagamentoCheque(100);
-pagamentoCheque.pagarCheque();
-
-const pagamentoDinheiro = new PagamentoDinheiro(200);
-pagamentoDinheiro.pagarDinheiro();
-
-const pagamentoTransferencia = new PagamentoPorTransferencia(300);
-pagamentoTransferencia.pagarTransferencia();
-
-pagamentoDinheiro.pagarTransferencia(); //🤔🤔🤔
+const pagamentoTransferencia = new Pagamento(300, "transferência");
+pagamentoTransferencia.pagar();
