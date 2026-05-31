@@ -1,5 +1,16 @@
-// Módulo A
-class Pedido {
+// Abstrações (Interfaces segregadas — ISP)
+interface Identificavel {
+  getId(): number;
+}
+
+interface IPedido extends Identificavel {
+  getId(): number;
+  getDescricao(): string;
+  getValor(): number;
+}
+
+// Módulo A — implementa todas as interfaces que precisa
+class Pedido implements IPedido {
   constructor(
     private id: number,
     private descricao: string,
@@ -19,14 +30,16 @@ class Pedido {
   }
 }
 
-// Módulo B
-class GerenciadorPedido extends Pedido {
+// Módulo B — depende apenas da interface que realmente usa (ISP + DIP)
+class GerenciadorPedido {
+  constructor(private pedidoId: Identificavel) {}
+
   mostrarIdPedido(): void {
-    console.log(this.getId());
+    console.log(this.pedidoId.getId());
   }
 }
 
 // Utilização dos Módulos A e B
 const pedido = new Pedido(1, "Produto A", 100);
-const gerenciadorPedido = new GerenciadorPedido(pedido.getId(), pedido.getDescricao(), pedido.getValor());
+const gerenciadorPedido = new GerenciadorPedido(pedido);
 gerenciadorPedido.mostrarIdPedido();
