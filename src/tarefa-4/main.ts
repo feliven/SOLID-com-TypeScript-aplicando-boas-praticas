@@ -1,33 +1,59 @@
-type IFormaPagamento = "cheque" | "dinheiro" | "Pix";
+interface IMetodoPagamento {
+  pagar(valor: number): void;
+}
+
+class PagamentoCheque implements IMetodoPagamento {
+  pagar(valor: number): void {
+    console.log(`O pagamento de ${valor} será feito por cheque.`);
+  }
+}
+
+class PagamentoDinheiro implements IMetodoPagamento {
+  pagar(valor: number): void {
+    console.log(`O pagamento de ${valor} será feito por dinheiro.`);
+  }
+}
+
+class PagamentoPix implements IMetodoPagamento {
+  pagar(valor: number): void {
+    console.log(`O pagamento de ${valor} será feito por Pix.`);
+  }
+}
+
+class PagamentoTransferencia implements IMetodoPagamento {
+  pagar(valor: number): void {
+    console.log(`O pagamento de ${valor} será feito por transferência.`);
+  }
+}
 
 interface IPagamento {
   valor: number;
-  formaPagamento: IFormaPagamento;
+  metodoPagamento: IMetodoPagamento;
   pagar(): void;
 }
 
 class Pagamento implements IPagamento {
   valor: number;
-  formaPagamento: IFormaPagamento;
+  metodoPagamento: IMetodoPagamento;
 
-  constructor(valor: number, formaPagamento: IFormaPagamento) {
+  constructor(valor: number, metodoPagamento: IMetodoPagamento) {
     this.valor = valor;
-    this.formaPagamento = formaPagamento;
+    this.metodoPagamento = metodoPagamento;
   }
 
   pagar(): void {
-    console.log(`O pagamento de ${this.valor} será feito por ${this.formaPagamento}.`);
+    this.metodoPagamento.pagar(this.valor);
   }
 }
 
-const pagamentoCheque = new Pagamento(100, "cheque");
+const pagamentoCheque = new Pagamento(100, new PagamentoCheque());
 pagamentoCheque.pagar();
 
-const pagamentoDinheiro = new Pagamento(200, "dinheiro");
+const pagamentoDinheiro = new Pagamento(200, new PagamentoDinheiro());
 pagamentoDinheiro.pagar();
 
-// const pagamentoTransferencia = new Pagamento(300, "transferência");
-// pagamentoTransferencia.pagar();
+const pagamentoTransferencia = new Pagamento(300, new PagamentoTransferencia());
+pagamentoTransferencia.pagar();
 
-const pagamentoPix = new Pagamento(300, "Pix");
+const pagamentoPix = new Pagamento(300, new PagamentoPix());
 pagamentoPix.pagar();
