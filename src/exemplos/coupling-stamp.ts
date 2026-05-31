@@ -1,34 +1,32 @@
-interface IPedido {
-  id: number;
-  descricao: string;
-  valor: number;
-}
-
 // Módulo A
 class Pedido {
-  constructor(private pedido: IPedido) {}
+  constructor(
+    private id: number,
+    private descricao: string,
+    private valor: number,
+  ) {}
 
   getId(): number {
-    return this.pedido.id;
+    return this.id;
   }
 
-  getPedido(): IPedido {
-    return this.pedido;
+  getDescricao(): string {
+    return this.descricao;
+  }
+
+  getValor(): number {
+    return this.valor;
   }
 }
 
 // Módulo B
 class GerenciadorPedido extends Pedido {
-  constructor(pedido: IPedido) {
-    super(pedido);
-  }
-
   mostrarIdPedido(): void {
     console.log(this.getId());
   }
 }
 
 // Utilização dos Módulos A e B
-const pedido = new Pedido({ id: 1, descricao: "Produto A", valor: 100 });
-const gerenciadorPedido = new GerenciadorPedido(pedido.getPedido());
+const pedido = new Pedido(1, "Produto A", 100);
+const gerenciadorPedido = new GerenciadorPedido(pedido.getId(), pedido.getDescricao(), pedido.getValor());
 gerenciadorPedido.mostrarIdPedido();
