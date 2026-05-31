@@ -4,6 +4,7 @@ export default class Colaborador {
   public readonly nome: string;
   private _cargo: Cargos;
   private _saldo: number;
+
   constructor(nome: string, cargo: Cargos) {
     this.nome = nome;
     this._cargo = cargo;

@@ -1,5 +1,5 @@
 import Colaborador from "./Colaborador";
-import Sistema from "./Sistema";
+import Sistema from "./QuadroDeColaboradores";
 import { Cargos } from "./enum/cargos";
 
 const sistema = new Sistema();
