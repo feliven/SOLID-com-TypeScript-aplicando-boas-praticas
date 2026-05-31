@@ -44,15 +44,19 @@ class FuncionarioEfetivo extends Funcionario implements IFuncionarioEfetivo {
   getSalario(): number {
     return this.salario;
   }
+}
 
-  calculaSalarioLiquido(): number {
-    const TAXA_DESCONTO = 0.2;
-    const desconto = this.salario * TAXA_DESCONTO;
-    return this.salario - desconto;
+class CalculadoraDeSalario {
+  private readonly TAXA_DESCONTO = 0.2;
+
+  calculaSalarioLiquido(funcionario: IFuncionarioEfetivo): number {
+    const salario = funcionario.getSalario();
+    const desconto = salario * this.TAXA_DESCONTO;
+    return salario - desconto;
   }
 
-  calculaParticipacaoDeLucros(lucro: number): number {
-    return lucro * this.salario;
+  calculaParticipacaoDeLucros(funcionario: IFuncionarioEfetivo, lucro: number): number {
+    return lucro * funcionario.getSalario();
   }
 }
 
@@ -76,13 +80,14 @@ class FuncionarioVoluntario extends Funcionario implements IFuncionarioVoluntari
 }
 
 const funcionarioEfetivo = new FuncionarioEfetivo("João", 40, 2400);
+const calculadora = new CalculadoraDeSalario();
 const funcionarioVoluntario = new FuncionarioVoluntario("Enzo", 20, funcionarioEfetivo);
 
 //Efetivo
 console.log("nome:", funcionarioEfetivo.getNome());
 console.log("salário bruto:", funcionarioEfetivo.getSalario());
-console.log("salário líquido:", funcionarioEfetivo.calculaSalarioLiquido());
-console.log("salário com PL:", funcionarioEfetivo.calculaParticipacaoDeLucros(2.5), "\n");
+console.log("salário líquido:", calculadora.calculaSalarioLiquido(funcionarioEfetivo));
+console.log("salário com PL:", calculadora.calculaParticipacaoDeLucros(funcionarioEfetivo, 2.5), "\n");
 
 //Voluntário
 console.log("nome:", funcionarioVoluntario.getNome());
