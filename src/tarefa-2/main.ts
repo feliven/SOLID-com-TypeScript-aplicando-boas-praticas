@@ -4,6 +4,8 @@ interface Contrato {
   titulo: string;
   GANHO_POR_HORA: number;
   CARGA_HORARIA_DIARIA: number;
+  remuneracao(): number;
+  descricaoFuncionario(): void;
 }
 
 class Funcionario implements Contrato {
@@ -13,12 +15,12 @@ class Funcionario implements Contrato {
     public CARGA_HORARIA_DIARIA: number,
   ) {}
 
-  getRemuneracao(): number {
+  remuneracao(): number {
     return this.GANHO_POR_HORA * this.CARGA_HORARIA_DIARIA * MES_COMERCIAL;
   }
 
-  descreverFuncionario() {
-    console.log(`Sou ${this.titulo} e meu salário líquido mensal é R$ ${this.getRemuneracao()}`);
+  descricaoFuncionario() {
+    console.log(`Sou ${this.titulo} e meu salário líquido mensal é R$ ${this.remuneracao()}`);
   }
 }
 
@@ -40,6 +42,10 @@ export class Pejotinha extends Funcionario {
   }
 }
 
-new Celetista().descreverFuncionario();
-new Estagiario().descreverFuncionario();
-new Pejotinha().descreverFuncionario();
+const bruna = new Celetista();
+const tiago = new Estagiario();
+const julia = new Pejotinha();
+
+bruna.descricaoFuncionario();
+tiago.descricaoFuncionario();
+julia.descricaoFuncionario();
