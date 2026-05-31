@@ -10,15 +10,12 @@ class ProcessadorPagamento {
 }
 
 // Módulo B
-class CarrinhoCompras {
-  constructor(private processador: ProcessadorPagamento) {}
-
+class CarrinhoCompras extends ProcessadorPagamento {
   finalizarCompra(status: boolean): void {
-    this.processador.processarPagamento(status);
+    this.processarPagamento(status);
   }
 }
 
 // Utilização dos Módulos A e B
-const processador = new ProcessadorPagamento();
-const carrinho = new CarrinhoCompras(processador);
+const carrinho = new CarrinhoCompras();
 carrinho.finalizarCompra(true);
