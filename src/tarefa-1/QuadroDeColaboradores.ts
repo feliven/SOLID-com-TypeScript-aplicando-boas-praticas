@@ -7,11 +7,11 @@ export default class QuadroDeColaboradores {
     this._colaboradores = [];
   }
 
-  contratarColaborador(colaborador: Colaborador) {
+  contratar(colaborador: Colaborador) {
     this._colaboradores.push(colaborador);
   }
 
-  demitirColaborador(colaboradorChave: Colaborador) {
+  demitir(colaboradorChave: Colaborador) {
     this._colaboradores = this._colaboradores.filter((colaborador) => colaborador !== colaboradorChave);
   }
 

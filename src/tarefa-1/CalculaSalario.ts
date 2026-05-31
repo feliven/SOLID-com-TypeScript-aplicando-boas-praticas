@@ -1,13 +1,13 @@
 import { Cargos } from "./enum/cargos";
 
 export default class CalculaSalario {
-  protected salarioBase: number;
+  private salarioBase: number;
 
   constructor(salarioBase: number = 1000) {
     this.salarioBase = salarioBase;
   }
 
-  calcularSalario(cargo: Cargos) {
+  calcular(cargo: Cargos) {
     if (cargo === Cargos.Estagiario) {
       return this.salarioBase * 1.2;
     } else if (cargo === Cargos.Junior) {
