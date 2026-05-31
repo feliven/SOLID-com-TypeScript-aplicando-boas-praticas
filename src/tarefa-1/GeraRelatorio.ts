@@ -15,6 +15,6 @@ export default class GeraRelatorio {
         salario: this._servicoCalulaSalario.calcular(colaborador.cargo),
       };
     });
-    return JSON.stringify(relatorio);
+    return JSON.stringify(relatorio, null, 2);
   }
 }
