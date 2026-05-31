@@ -1,37 +1,12 @@
-{
-  const GANHO_POR_HORA_CLT = 24;
-  const CARGA_HORARIA_DIARIA_CLT = 8;
+import { Contrato } from "./Contrato";
+import { TipoFuncionario } from "./TipoFuncionario";
 
-  const GANHO_POR_HORA_ESTAGIARIO = 14;
-  const CARGA_HORARIA_DIARIA_ESTAGIARIO = 4;
+const clt = new Contrato(TipoFuncionario.CLT, 24, 8);
+const estagiario = new Contrato(TipoFuncionario.ESTAGIO, 14, 4);
 
-  const MES_COMERCIAL = 20; //dias trabalhados no mês
-  class ContratoClt {
-    titulo: string = "CLT";
-  }
+clt.descreverFuncionario();
+estagiario.descreverFuncionario();
 
-  class Estagio {
-    titulo: string = "Estágio";
-  }
+const pejotinha = new Contrato(TipoFuncionario.PJ, 30, 9);
 
-  class FolhaDePagamento {
-    static calcularSalarioMensal(funcionario: ContratoClt | Estagio): number {
-      if (funcionario instanceof ContratoClt) {
-        return GANHO_POR_HORA_CLT * CARGA_HORARIA_DIARIA_CLT * MES_COMERCIAL;
-      } else if (funcionario instanceof Estagio) {
-        return GANHO_POR_HORA_ESTAGIARIO * CARGA_HORARIA_DIARIA_ESTAGIARIO * MES_COMERCIAL;
-      }
-      return 0;
-    }
-  }
-
-  const funcionarioClt = new ContratoClt();
-  const funcionarioEstagiario = new Estagio();
-
-  console.log(
-    `Sou ${funcionarioClt.titulo} e meu salário líquido mensal é R$ ${FolhaDePagamento.calcularSalarioMensal(funcionarioClt)}`,
-  );
-  console.log(
-    `Sou ${funcionarioEstagiario.titulo} e meu salário líquido mensal é R$ ${FolhaDePagamento.calcularSalarioMensal(funcionarioEstagiario)}`,
-  );
-}
+pejotinha.descreverFuncionario();
