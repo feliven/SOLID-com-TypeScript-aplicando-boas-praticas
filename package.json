@@ -13,7 +13,8 @@
     "tarefa-4": "npx tsc tarefa-4/main.ts --outDir tarefa-4/dist && node tarefa-4/dist/main.js",
     "tarefa-5": "npx tsc tarefa-5/main.ts --outDir tarefa-5/dist && node tarefa-5/dist/main.js"
   },
-  "dependencies": {
-    "typescript": "^5.3.2"
+  "devDependencies": {
+    "@types/node": "^25.9.1",
+    "typescript": "^6.0.3"
   }
 }
