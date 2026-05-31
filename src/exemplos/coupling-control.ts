@@ -1,6 +1,6 @@
 // Módulo A
-class ProcessadorPagamento {
-  processarPagamento(status: boolean): void {
+class ServiceProcessadorPagamento {
+  processar(status: boolean): void {
     if (status) {
       console.log("Pagamento processado com sucesso.");
     } else {
@@ -10,12 +10,15 @@ class ProcessadorPagamento {
 }
 
 // Módulo B
-class CarrinhoCompras extends ProcessadorPagamento {
+class CarrinhoCompras {
+  constructor(private servicePagamento: ServiceProcessadorPagamento) {}
+
   finalizarCompra(status: boolean): void {
-    this.processarPagamento(status);
+    this.servicePagamento.processar(status);
   }
 }
 
 // Utilização dos Módulos A e B
-const carrinho = new CarrinhoCompras();
+const servicePagamento = new ServiceProcessadorPagamento();
+const carrinho = new CarrinhoCompras(servicePagamento);
 carrinho.finalizarCompra(true);
