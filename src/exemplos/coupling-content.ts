@@ -5,7 +5,7 @@ interface ICalculadora {
 }
 
 interface ILogger {
-  registrarLog(mensagem: string): void;
+  registrarLog(resultado: number): void;
 }
 
 // Módulo A — implementação concreta da calculadora
@@ -23,8 +23,8 @@ class Calculadora implements ICalculadora {
 
 // Módulo B — depende da abstração ILogger, não acessa dados internos de outro módulo
 class Logger implements ILogger {
-  registrarLog(mensagem: string): void {
-    console.log(mensagem);
+  registrarLog(resultado: number): void {
+    console.log(`Resultado da operação: ${resultado}`);
   }
 }
 
@@ -33,4 +33,4 @@ const calculadora: ICalculadora = new Calculadora();
 const logger: ILogger = new Logger();
 
 calculadora.somar(2, 3);
-logger.registrarLog(`Resultado da operação: ${calculadora.obterResultado()}`);
+logger.registrarLog(calculadora.obterResultado());
