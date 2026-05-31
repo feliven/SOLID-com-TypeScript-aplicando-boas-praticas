@@ -1,4 +1,10 @@
-class Usuario {
+// Abstração (Interface)
+interface IUsuario {
+  getNome(): string;
+}
+
+// Módulo A — implementação concreta
+class Usuario implements IUsuario {
   constructor(private nome: string) {}
 
   getNome(): string {
@@ -6,17 +12,16 @@ class Usuario {
   }
 }
 
-class GerenciadorUsuario extends Usuario {
-  constructor(nome: string) {
-    super(nome);
-  }
+// Módulo B — usa composição em vez de herança (tem um usuário, não é um usuário)
+class GerenciadorUsuario {
+  constructor(private usuario: IUsuario) {}
 
   mostrarNomeUsuario(): void {
-    console.log(this.getNome());
+    console.log(this.usuario.getNome());
   }
 }
 
 // Utilização dos Módulos A e B
-const usuario = new Usuario("Ana");
-const gerenciadorUsuario = new GerenciadorUsuario(usuario.getNome());
+const usuario: IUsuario = new Usuario("Ana");
+const gerenciadorUsuario = new GerenciadorUsuario(usuario);
 gerenciadorUsuario.mostrarNomeUsuario();
