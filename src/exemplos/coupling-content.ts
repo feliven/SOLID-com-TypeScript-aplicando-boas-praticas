@@ -13,19 +13,15 @@ class Calculadora {
 
 // Módulo B
 class Logger {
-  private calculadora: Calculadora;
-
-  constructor(calculadora: Calculadora) {
-    this.calculadora = calculadora;
-  }
+  constructor(private resultado: number) {}
 
   registrarLog(): void {
-    console.log(`Resultado da operação: ${this.calculadora.obterResultado()}`);
+    console.log(`Resultado da operação: ${this.resultado}`);
   }
 }
 
 // Utilização dos Módulos A e B
 const calculadora = new Calculadora();
 calculadora.somar(2, 3);
-const logger = new Logger(calculadora);
+const logger = new Logger(calculadora.obterResultado());
 logger.registrarLog();
