@@ -1,12 +1,45 @@
-import { Contrato } from "./Contrato";
-import { TipoFuncionario } from "./TipoFuncionario";
+const MES_COMERCIAL = 20; // dias trabalhados no mês
 
-const clt = new Contrato(TipoFuncionario.CLT, 24, 8);
-const estagiario = new Contrato(TipoFuncionario.ESTAGIO, 14, 4);
+interface Contrato {
+  titulo: string;
+  GANHO_POR_HORA: number;
+  CARGA_HORARIA_DIARIA: number;
+}
 
-clt.descreverFuncionario();
-estagiario.descreverFuncionario();
+class Funcionario implements Contrato {
+  constructor(
+    public titulo: string,
+    public GANHO_POR_HORA: number,
+    public CARGA_HORARIA_DIARIA: number,
+  ) {}
 
-const pejotinha = new Contrato(TipoFuncionario.PJ, 30, 9);
+  getRemuneracao(): number {
+    return this.GANHO_POR_HORA * this.CARGA_HORARIA_DIARIA * MES_COMERCIAL;
+  }
 
-pejotinha.descreverFuncionario();
+  descreverFuncionario() {
+    console.log(`Sou ${this.titulo} e meu salário líquido mensal é R$ ${this.getRemuneracao()}`);
+  }
+}
+
+export class Celetista extends Funcionario {
+  constructor() {
+    super("CLT", 24, 8);
+  }
+}
+
+export class Estagiario extends Funcionario {
+  constructor() {
+    super("estagiário", 14, 4);
+  }
+}
+
+export class Pejotinha extends Funcionario {
+  constructor() {
+    super("pejotinha", 30, 9);
+  }
+}
+
+new Celetista().descreverFuncionario();
+new Estagiario().descreverFuncionario();
+new Pejotinha().descreverFuncionario();
