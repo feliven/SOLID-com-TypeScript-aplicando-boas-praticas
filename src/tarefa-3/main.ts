@@ -85,9 +85,11 @@ const funcionarioVoluntario = new FuncionarioVoluntario("Enzo", 20, funcionarioE
 
 //Efetivo
 console.log("nome:", funcionarioEfetivo.getNome());
+funcionarioEfetivo.trabalha();
 console.log("salário bruto:", funcionarioEfetivo.getSalario());
 console.log("salário líquido:", calculadora.calculaSalarioLiquido(funcionarioEfetivo));
 console.log("salário com PL:", calculadora.calculaParticipacaoDeLucros(funcionarioEfetivo, 2.5), "\n");
 
 //Voluntário
 console.log("nome:", funcionarioVoluntario.getNome());
+funcionarioVoluntario.trabalha();
