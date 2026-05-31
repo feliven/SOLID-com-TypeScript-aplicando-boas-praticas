@@ -1,25 +1,22 @@
-interface IUsuario {
-  nome: string;
-  idade?: number;
-}
-
 class Usuario {
-  constructor(private usuario: IUsuario) {}
+  constructor(private nome: string) {}
 
-  getDados(): IUsuario {
-    return this.usuario;
+  getNome(): string {
+    return this.nome;
   }
 }
 
-class GerenciadorUsuario {
-  constructor(private usuario: IUsuario) {}
+class GerenciadorUsuario extends Usuario {
+  constructor(nome: string) {
+    super(nome);
+  }
 
   mostrarNomeUsuario(): void {
-    console.log(this.usuario.nome);
+    console.log(this.getNome());
   }
 }
 
 // Utilização dos Módulos A e B
-const usuario = new Usuario({ nome: "Ana" });
-const gerenciadorUsuario = new GerenciadorUsuario(usuario.getDados());
+const usuario = new Usuario("Ana");
+const gerenciadorUsuario = new GerenciadorUsuario(usuario.getNome());
 gerenciadorUsuario.mostrarNomeUsuario();
