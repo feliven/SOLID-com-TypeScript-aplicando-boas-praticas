@@ -1,25 +1,29 @@
-import Cliente from "../entities/Cliente";
+import { ICliente, IRepository } from "../interfaces/interfaces";
 
-export default class PostgresRepository {
-  private db: Record<number, Cliente>;
+export default class PostgresRepository implements IRepository {
+  private db: Record<number, ICliente>;
 
   constructor() {
     this.db = {};
   }
 
-  add(cliente: Cliente) {
+  buscaClientePorId(id: number) {
+    const registro = Object.entries(this.db).find(([_, cliente]) => {
+      return cliente.id === id;
+    });
+
+    if (registro) {
+      const [_, cliente] = registro;
+      return cliente;
+    }
+    return undefined;
+  }
+
+  adicionaCliente(cliente: ICliente) {
     this.db[cliente.id] = cliente;
   }
 
-  list() {
-    const clientes: Cliente[] = [];
-
-    for (const chave in this.db) {
-      if (Object.prototype.hasOwnProperty.call(this.db, chave)) {
-        clientes.push(this.db[chave]);
-      }
-    }
-
-    return clientes;
+  listaClientes(): ICliente[] {
+    return Object.values(this.db);
   }
 }

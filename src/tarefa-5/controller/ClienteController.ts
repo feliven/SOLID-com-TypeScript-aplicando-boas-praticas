@@ -1,15 +1,20 @@
-import Cliente from "../entities/Cliente";
-import InMemoryRepository from "../repositories/InMemoryRepository";
+import { IRepository, ICliente, IClienteController } from "../interfaces/interfaces";
 
-export default class ClienteController {
-  repository: InMemoryRepository;
-  constructor() {
-    this.repository = new InMemoryRepository();
+export default class ClienteController implements IClienteController {
+  repository: IRepository;
+
+  constructor(repository: IRepository) {
+    this.repository = repository;
   }
 
-  adicionaCliente(cliente: Cliente) {
+  buscaClientePorId(id: number): ICliente | undefined {
+    return this.repository.buscaClientePorId(id);
+  }
+
+  adicionaCliente(cliente: ICliente) {
     this.repository.adicionaCliente(cliente);
   }
+
   listaClientes() {
     return this.repository.listaClientes();
   }
