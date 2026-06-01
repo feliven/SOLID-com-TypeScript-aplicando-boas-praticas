@@ -7,10 +7,6 @@ export default class ClienteController implements IClienteController {
     this.repository = repository;
   }
 
-  buscaClientePorId(id: number): ICliente | undefined {
-    return this.repository.buscaClientePorId(id);
-  }
-
   adicionaCliente(cliente: ICliente) {
     this.repository.adicionaCliente(cliente);
   }

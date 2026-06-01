@@ -4,15 +4,15 @@ export interface ICliente {
   email: string;
 }
 
-export interface IRepository {
-  buscaClientePorId(id: number): ICliente | undefined;
+interface AdicionaListaCliente {
   adicionaCliente(cliente: ICliente): void;
   listaClientes(): ICliente[];
 }
 
-export interface IClienteController {
-  repository: IRepository;
+export interface IRepository extends AdicionaListaCliente {
   buscaClientePorId(id: number): ICliente | undefined;
-  adicionaCliente(cliente: ICliente): void;
-  listaClientes(): ICliente[];
+}
+
+export interface IClienteController extends AdicionaListaCliente {
+  repository: IRepository;
 }
