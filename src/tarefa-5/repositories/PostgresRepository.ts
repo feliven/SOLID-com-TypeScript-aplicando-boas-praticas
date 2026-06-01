@@ -12,6 +12,9 @@ export default class PostgresRepository implements IRepository {
   }
 
   adicionaCliente(cliente: ICliente) {
+    if (this.db[cliente.id]) {
+      throw new Error("ID do cliente já existe!");
+    }
     this.db[cliente.id] = cliente;
   }
 

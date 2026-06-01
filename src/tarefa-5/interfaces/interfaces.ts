@@ -10,6 +10,9 @@ export interface IRepository {
   listaClientes(): ICliente[];
 }
 
-export interface IClienteController extends IRepository {
+export interface IClienteController {
   repository: IRepository;
+  buscaClientePorId(id: number): ICliente | undefined;
+  adicionaCliente(cliente: ICliente): void;
+  listaClientes(): ICliente[];
 }
