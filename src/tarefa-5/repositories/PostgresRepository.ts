@@ -8,15 +8,7 @@ export default class PostgresRepository implements IRepository {
   }
 
   buscaClientePorId(id: number) {
-    const registro = Object.entries(this.db).find(([_, cliente]) => {
-      return cliente.id === id;
-    });
-
-    if (registro) {
-      const [_, cliente] = registro;
-      return cliente;
-    }
-    return undefined;
+    return this.db[id];
   }
 
   adicionaCliente(cliente: ICliente) {
