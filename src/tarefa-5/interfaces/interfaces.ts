@@ -13,6 +13,4 @@ export interface IRepository extends AdicionaListaCliente {
   buscaClientePorId(id: number): ICliente | undefined;
 }
 
-export interface IClienteController extends AdicionaListaCliente {
-  repository: IRepository;
-}
+export interface IClienteController extends AdicionaListaCliente {}

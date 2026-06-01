@@ -1,7 +1,7 @@
 import { IRepository, ICliente, IClienteController } from "../interfaces/interfaces";
 
 export default class ClienteController implements IClienteController {
-  repository: IRepository;
+  private repository: IRepository;
 
   constructor(repository: IRepository) {
     this.repository = repository;
